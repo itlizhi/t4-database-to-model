@@ -1,0 +1,71 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="manager.ttinclude" #>
+<#@ include file="entityHelper.ttinclude" #>
+<# 
+    // 数据库连接
+    var connectionString = @"server=127.0.0.1;port=3306;uid=root;password=xxxxxxx;character set=utf8mb4;";
+
+    // 需要解析的数据库
+    var database = "crm2.0";
+
+    // 文件版权信息
+    var copyright =  "2016 NERICHIST All Rights Reserved";
+    var version = Environment.Version;
+    var author = "lizhi by t4";
+
+    var manager = Manager.Create(Host, GenerationEnvironment);
+    var entities = EntityHelper.GetMysqlEntities(connectionString, database);
+
+    foreach(Entity entity in entities)
+    {
+        manager.StartNewFile(entity.EntityName + ".cs");
+#>
+//-----------------------------------------------------------------------
+//<copyright>
+// * Copyright (C) <#= copyright #>
+// * version : <#= version #>
+// * author  : <#= author #>
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System;
+using Dapper.Contrib.Extensions;
+
+namespace NSName
+{
+ 
+	[Table("<#= entity.EntityName #>")]
+    public class <#= entity.EntityName #>
+    {
+<#
+        for(int i = 0; i < entity.Fields.Count; i++)
+        {
+            if(entity.Fields[i].IsPRI &&  entity.Fields[i].Type=="int"){
+#>       
+        [Key]
+	    public <#= entity.Fields[i].Type #> <#= entity.Fields[i].Name #> { get; set; }
+<#
+    }else if(entity.Fields[i].IsPRI ){
+#>
+	    [ExplicitKey]
+        public <#= entity.Fields[i].Type #> <#= entity.Fields[i].Name #> { get; set; }
+<#
+            }else{
+#>    
+<#if(!string.IsNullOrWhiteSpace(entity.Fields[i].Comment)){ #>
+        /// <summary>
+        /// <#= entity.Fields[i].Comment #>
+        /// </summary>
+<#}#>
+        public <#= entity.Fields[i].Type #><#= entity.Fields[i].IsNull?"?":""#> <#= entity.Fields[i].Name #> { get; set; }
+<#            }
+        }
+#>
+    }
+}
+<#        
+        manager.EndBlock(); 
+    }
+
+    manager.Process(true);
+#>
