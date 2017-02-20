@@ -1,17 +1,19 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
-<#@ include file="manager.ttinclude" #>
-<#@ include file="entityHelper.ttinclude" #>
+<#@ include file="../manager.ttinclude" #>
+<#@ include file="../entityHelper.ttinclude" #>
 <# 
     // 数据库连接
-    var connectionString = @"server=127.0.0.1;port=3306;uid=root;password=xxxxxxx;character set=utf8mb4;";
+    var connectionString = @"server=127.0.0.1;port=3306;uid=root;password=cac-111.;character set=utf8mb4;";
 
     // 需要解析的数据库
-    var database = "crm2.0";
+    var database = "dapper";
 
     // 文件版权信息
     var copyright =  "2016 NERICHIST All Rights Reserved";
     var version = Environment.Version;
     var author = "lizhi by t4";
+
+	var isEnableEM=false; //是否启用枚举字段 字段名称+Em 为枚举类型
 
     var manager = Manager.Create(Host, GenerationEnvironment);
     var entities = EntityHelper.GetMysqlEntities(connectionString, database);

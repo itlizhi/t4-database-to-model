@@ -56,34 +56,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="_sqlserver.cs">
+    <Compile Include="mysql\explicitkey.cs">
+      <DependentUpon>_mysql.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mysql\grade.cs">
+      <DependentUpon>_mysql.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mysql\mitpk.cs">
+      <DependentUpon>_mysql.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mysql\student.cs">
+      <DependentUpon>_mysql.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sqlserver\TUser.cs">
+      <DependentUpon>_sqlserver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sqlserver\_sqlserver.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_sqlserver.tt</DependentUpon>
     </Compile>
-    <Compile Include="_mysql.cs">
+    <Compile Include="mysql\_mysql.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_mysql.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sys_user.cs">
-      <DependentUpon>_mysql.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="entityHelper.ttinclude" />
     <None Include="manager.ttinclude" />
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_mysql.tt">
+    <Content Include="mysql\_mysql.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>_mysql.cs</LastGenOutput>
     </Content>
-    <Content Include="_sqlserver.tt">
+    <Content Include="sqlserver\_sqlserver.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>_sqlserver.cs</LastGenOutput>
     </Content>

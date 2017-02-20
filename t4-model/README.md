@@ -1,3 +1,6 @@
+# t4-database-to-model
+T4模板生成数据库模型，包括备注，目前支持sqlserver和mysql
+```
 //-----------------------------------------------------------------------
 //<copyright>
 // * Copyright (C) 2016 NERICHIST All Rights Reserved
@@ -11,48 +14,63 @@ using Dapper.Contrib.Extensions;
 
 namespace NSName
 {
- 
-	[Table("sys_user")]
-    public class sys_user
+    [Table("TUser")]
+    public class TUser
     {
        
         [Key]
-	    public int Id { get; set; }
+        public int ID { get; set; }
     
-        public string Email { get; set; }
+        /// <summary>
+        /// 账号/邮箱
+        /// </summary>
+        public string Account { get; set; }
     
         public string Password { get; set; }
     
-        public string UserName { get; set; }
+        public string Email { get; set; }
+    
+        public string Mobile { get; set; }
     
         /// <summary>
-        /// 测试枚举字段
+        /// 测试
         /// </summary>
-        public byte UserStatus { get; set; }
+        public byte RoleID { get; set; }
     
         /// <summary>
-        /// 创建人
+        /// 用户名
         /// </summary>
         public string Creator { get; set; }
     
-        /// <summary>
-        /// 创建时间
-        /// </summary>
         public DateTime CreateDateTime { get; set; }
     
         /// <summary>
-        /// 修改人
+        /// 修改
         /// </summary>
         public string Modifier { get; set; }
     
-        /// <summary>
-        /// 修改时间
-        /// </summary>
         public DateTime ModifyDateTime { get; set; }
     
+        public bool IsValid { get; set; }
+    }
+
+    [Table("explicitkey")]
+    public class explicitkey
+    {
+       [ExplicitKey]
+        public string Guid { get; set; }
+    
         /// <summary>
-        /// 是否删除，默认 false
+        /// 标题
         /// </summary>
-        public bool IsDelete { get; set; }
+        public string Title { get; set; }
+    
+        public bool Isdelete { get; set; }
+    
+        public string test { get; set; }
     }
 }
+
+
+
+```

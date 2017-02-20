@@ -69,27 +69,34 @@
                         if (entity == null)
                         {
                             entity = new Entity(table);
-                            entity.Fields.Add(new Field
+							var field=new Field
                             {
                                 Name = reader["字段名"].ToString(),
                                 Type = GetCLRType(reader["类型"].ToString()),
                                 IsPRI = Convert.ToBoolean(reader["主键"]),
                                 IsNull = Convert.ToBoolean(reader["允许空"]),
                                 Comment = reader["字段说明"].ToString()
-                            });
-
+                            };
+							if(field.Type=="string" || field.Type=="byte[]"){
+								field.IsNull=false;
+							}
+                            entity.Fields.Add(field);
                             list.Add(entity);
                         }
                         else
                         {
-                            entity.Fields.Add(new Field
+							var field=new Field
                             {
                                 Name = reader["字段名"].ToString(),
                                 Type = GetCLRType(reader["类型"].ToString()),
                                 IsPRI = Convert.ToBoolean(reader["主键"]),
                                 IsNull = Convert.ToBoolean(reader["允许空"]),
                                 Comment = reader["字段说明"].ToString()
-                            });
+                            };
+						    if(field.Type=="string" || field.Type=="byte[]"){
+								field.IsNull=false;
+							}
+                            entity.Fields.Add(field);
                         }
                     }
                     reader.Close();

@@ -1,9 +1,9 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
-<#@ include file="manager.ttinclude" #>
-<#@ include file="entityHelper.ttinclude" #>
+<#@ include file="../manager.ttinclude" #>
+<#@ include file="../entityHelper.ttinclude" #>
 <# 
     // 数据库连接
-    var connectionString = @"Data Source = .;Initial Catalog=OMSDB;User Id=sa;PassWord=xxxxx";
+    var connectionString = @"Data Source =.;Initial Catalog=testDB;User Id=sa;PassWord=cac-111.";
     // 文件版权信息
     var copyright =  "2016 NERICHIST All Rights Reserved";
     var version = Environment.Version;
